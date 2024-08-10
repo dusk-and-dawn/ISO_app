@@ -11,7 +11,7 @@
         <form method="post">
             <box>
             <div>Wie viele Angestellte arbeiten in Ihrer Firma?</div>
-            <input class = 'input' type="text" name="Wie viele Angestellte arbeiten in Ihrer Firma?" placeholder="Notiz zu Antwort">
+            <textarea class ='textarea' type="text" name="Wie viele Angestellte arbeiten in Ihrer Firma?" placeholder="Notiz zu Antwort"> </textarea>
             <select name="Glaubhaftigkeit">
                 <option value="unglaubwuerdig">unglaubwuerdig</option>
                 <option value="glaubwuerdig">glaubwuerdig</option>
@@ -33,8 +33,18 @@
             <input type="submit" value="Eintragen">
             </box>
         </form>
-        <input type="text">Wie viele Angestellte arbeiten in Ihrer Firma?</input>
-        <input type="text">Bezahlen Sie Steuern?</input>
-        <input type="text">Sind ihre Angestellten alle versichert?</input>
+        <br>
+        <form method="post">
+            <box>
+            <div>Sind ihre Angestellten alle versichert?</div>
+            <textarea class ='textarea' type="text" name="Bezahlen Sie Steuern??" placeholder="Notiz zu Antwort"></textarea>
+            <select name="Glaubhaftigkeit">
+                <option value="unklar">unklar</option>
+                <option value="unglaubwuerdig">unglaubwuerdig</option>
+                <option value="glaubwuerdig">glaubwuerdig</option>
+            </select>
+            <input type="submit" value="Eintragen">
+            </box>
+        </form>
     </body>
 </html>
