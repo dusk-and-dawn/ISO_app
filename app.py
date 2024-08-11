@@ -1,6 +1,7 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 from datetime import datetime 
 import pymongo
+from db import to_db
 
 app = Flask(__name__)
 
@@ -10,6 +11,11 @@ def index():
 
 @app.route('/about', methods= ('POST', 'GET'))
 def about():
+    if request.method == 'POST':
+        client = 'testClient'
+        name = request.form.get('Wie viele Angestellte arbeiten in Ihrer Firma?')
+        content = 'testContent'
+        to_db(client, name, content)
     return render_template('about.html')
 
 @app.route('/admin', methods= ('POST', 'GET'))
