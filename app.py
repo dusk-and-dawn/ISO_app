@@ -12,9 +12,12 @@ def index():
 @app.route('/about', methods= ('POST', 'GET'))
 def about():
     if request.method == 'POST':
-        client = 'testClient'
-        name = request.form.get('Wie viele Angestellte arbeiten in Ihrer Firma?')
-        content = 'testContent'
+        client = request.form['client']
+        name = 'CEO Interview'
+        content0 = request.form['Q1']
+        content1 = request.form['Q2']
+        content2 = request.form['Q3']
+        content = content0, content1, content2
         to_db(client, name, content)
     return render_template('about.html')
 
