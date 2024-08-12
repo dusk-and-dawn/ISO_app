@@ -14,4 +14,10 @@
     <h2 class = 'subtitle'>
         Hier gibt es all die gesammelten Infos in einer Uebersicht. 
     </h2>
+    <ul>
+        {% for element in clientinfo %}
+        <li>{{ element }}</li>
+        {% endfor %}
+    </ul>
 </body>
+</html>

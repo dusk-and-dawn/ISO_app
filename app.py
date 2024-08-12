@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, request
 from datetime import datetime 
 import pymongo
-from db import to_db
+from db import to_db, get_from_db, clean_house
 
 app = Flask(__name__)
 
@@ -23,7 +23,8 @@ def about():
 
 @app.route('/admin', methods= ('POST', 'GET'))
 def admin():
-    return render_template('admin.html')
+    clientinfo = get_from_db('CEO Interview')
+    return render_template('admin.html', clientinfo = clientinfo)
 
 if __name__ == '__main__':
     app.run(debug=True)
