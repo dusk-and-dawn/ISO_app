@@ -22,4 +22,4 @@ def clean_house():
     ISO.delete_many({})
 
 #clean_house()
-show_names()
+#show_names()

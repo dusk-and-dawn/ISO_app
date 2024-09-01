@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css" >
+    <title>add client</title>
+</head>
+<body> 
+<div class="columns is-vcentered" style="height:100vh;">
+    <div class="column is-2 is-flex is-justify-content-left is-align-items-center">
+        <aside class="menu">
+            <p class="menu-label">Home</p>
+            <ul class="menu-list">
+                <li><a href="{{ url_for('about')}}">landing page</a></li>
+                <li><a href="{{ url_for('about')}}">about</a></li>
+                <li><a href="{{ url_for('about')}}">contact</a></li>
+            </ul>
+            <p class="menu-label">ISO Prozess</p>
+            <ul class="menu-list"> 
+                <li><a href="{{ url_for('add_client')}}">CEO Interview</a></li>
+                <li><a href="{{ url_for('admin')}}">Admin Bereich</a></li>
+            </ul>
+        </aside>
+    </div>
+    <div class="column is-9">
+        <section>
+            <form method="post">
+                <box>
+                <div>Name des Unternehmens</div>
+                <input class ='input is-primary' name="client" placeholder="testClient"> </input>
+                </box>
+            <br>
+                <box>
+                <div>Gesellschaftsform</div>
+                <textarea class ='textarea' type="text" name="Q1" placeholder="GmbH"> </textarea>
+                </box>
+            <br>
+                <box>
+                <div>Geschaeftsfuehrer</div>
+                <textarea class ='textarea' type="text" name="Q2" placeholder="Peter Enis"></textarea>
+                </box>
+            <br>
+                <box>
+                <div>Kontaktdaten</div>
+                <textarea class ='textarea' type="text" name="Q3" placeholder="mail, telefon, adress"></textarea>
+                </box>
+            <br>
+                <input class='button' type="submit" value="Absenden">
+            </form>
+    
+        </section>
+    </div>
+</div>
+
+    
+</body>
+</html>

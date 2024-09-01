@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
+    <title>bauss page</title>
+    <style>
+        #clientinfo {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class='title'>
+        Picco's Raum 
+    </h1>
+    <h2 class='subtitle'>
+        Hier gibt es all die gesammelten Infos in einer Uebersicht. 
+    </h2>
+
+    <!-- Button to reveal the content -->
+    <button class="button is-primary" onclick="toggleInfo()">Show Info</button>
+
+    <!-- The hidden content -->
+    <div id="clientinfo" class="table-container">
+        <table class="table is-fullwidth is-striped">
+            <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>Information</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for element in clientinfo %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ element }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function toggleInfo() {
+            var infoDiv = document.getElementById("clientinfo");
+            var button = document.querySelector("button");
+
+            if (infoDiv.style.display === "none") {
+                infoDiv.style.display = "block";
+                button.textContent = "Hide Info";
+            } else {
+                infoDiv.style.display = "none";
+                button.textContent = "Show Info";
+            }
+        }
+    </script>
+</body>
+</html>

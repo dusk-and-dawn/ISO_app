@@ -20,11 +20,14 @@ def about():
         content = content0, content1, content2
         to_db(client, name, content)
     return render_template('about.html')
-
+@app.route('/addclient', methods=('POST', 'GET'))
+def add_client(): 
+    return render_template('add_client.html')
+    
 @app.route('/admin', methods= ('POST', 'GET'))
 def admin():
     clientinfo = get_from_db('CEO Interview')
-    return render_template('admin.html', clientinfo = clientinfo)
+    return render_template('test.html', clientinfo = clientinfo)
 
 if __name__ == '__main__':
     app.run(debug=True)
