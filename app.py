@@ -38,7 +38,7 @@ def add_client():
     
 @app.route('/admin', methods= ('POST', 'GET'))
 def admin():
-    clientinfo = get_from_db('CEO Interview')
+    clientinfo = get_from_db('Puppy')
     return render_template('test.html', clientinfo = clientinfo)
 
 if __name__ == '__main__':
