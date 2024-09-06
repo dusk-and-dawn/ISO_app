@@ -17,12 +17,12 @@
                 <ul class="menu-list">
                     <li><a href="{{ url_for('about')}}">Landing Page</a></li>
                     <li><a href="{{ url_for('about')}}">About</a></li>
-                    <li><a href="{{ url_for('about')}}">Contact</a></li>
+                    <li><a href="{{ url_for('admin')}}">Contact</a></li>
                 </ul>
                 <p class="menu-label">ISO Prozess</p>
                 <ul class="menu-list">
                     <li><a href="{{ url_for('add_client')}}">Neuer Kunde</a></li>
-                    <li><a href="{{ url_for('admin')}}">Admin Bereich</a></li>
+                    <li><a href="{{ url_for('begehung')}}">Begehung</a></li>
                 </ul>
             </aside>
         </div>
@@ -59,9 +59,16 @@
                                 </div>
                             </div>
                             <div class="field">
-                                <label class="label">Kontaktdaten</label>
+                                <label class="label">Ansprechpartner</label>
                                 <div class="control">
-                                    <textarea class="textarea" name="Q3" placeholder="mail, telefon, adress"></textarea>
+                                    <textarea class="textarea" name="Q3" placeholder="Kontaktperson"></textarea>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Hauptsitz ggf. Nebensitz</label>
+                                <div class="control">
+                                    <textarea class="textarea" name="Q4" placeholder="Köpenicker Straße 76, Brückenstraße 1, 10179 Berlin, Germany
+                                    "></textarea>
                                 </div>
                             </div>
                         </div>
@@ -73,19 +80,25 @@
                             <div class="field">
                                 <label class="label">Addresse</label>
                                 <div class="control">
-                                    <textarea class="textarea" name="Q4" placeholder="Ort"></textarea>
+                                    <textarea class="textarea" name="Q5" placeholder="Ort"></textarea>
                                 </div>
                             </div>
                             <div class="field">
                                 <label class="label">Telefon</label>
                                 <div class="control">
-                                    <textarea class="textarea" name="Q5" placeholder="GmbH"></textarea>
+                                    <textarea class="textarea" name="Q6" placeholder="GmbH"></textarea>
                                 </div>
                             </div>
                             <div class="field">
                                 <label class="label">Mail</label>
                                 <div class="control">
-                                    <textarea class="textarea" name="Q6" placeholder="bauss1@gmail.com"></textarea>
+                                    <textarea class="textarea" name="Q7" placeholder="bauss1@gmail.com"></textarea>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Teil eines Konzerns?</label>
+                                <div class="control">
+                                    <textarea class="textarea" name="Q8" placeholder="Selbststaendig"></textarea>
                                 </div>
                             </div>
                         </div>

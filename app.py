@@ -32,9 +32,15 @@ def add_client():
         content3 = request.form['Q4']
         content4 = request.form['Q5']
         content5 = request.form['Q6']
-        content = content0, content1, content2, content3, content4, content5
+        content6 = request.form['Q7']
+        content7 = request.form['Q8']
+        content = content0, content1, content2, content3, content4, content5, content6, content7
         to_db(client, name, content)
     return render_template('add_client.html')
+
+@app.route('/begehung,',methods=('POST', 'GET'))
+def begehung():
+    return render_template('visitation.html')
     
 @app.route('/admin', methods= ('POST', 'GET'))
 def admin():
