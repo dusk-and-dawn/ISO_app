@@ -8,3 +8,43 @@
     <title>Begehung</title>
 </head>
 
+<body>
+    <div class="columns is-vcentered" style="height:100vh;">
+        <!-- Sidebar -->
+        <div class="column is-2">
+            <aside class="menu">
+                <p class="menu-label">Home</p>
+                <ul class="menu-list">
+                    <li><a href="{{ url_for('about')}}">Landing Page</a></li>
+                    <li><a href="{{ url_for('about')}}">About</a></li>
+                    <li><a href="{{ url_for('admin')}}">Contact</a></li>
+                </ul>
+                <p class="menu-label">ISO Prozess</p>
+                <ul class="menu-list">
+                    <li><a href="{{ url_for('add_client')}}">Neuer Kunde</a></li>
+                    <li><a href="{{ url_for('begehung')}}">Begehung</a></li>
+                </ul>
+            </aside>
+        </div>
+        <div class="column is-4">
+            <div class="dropdown is-active">
+                <div class="dropdown-trigger">
+                  <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                    <span>Dropdown button</span>
+                    <span class="icon is-small">
+                      <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                  </button>
+                </div>
+                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                  <div class="dropdown-content">
+                    <a class="dropdown-item"> Ja </a>
+                    <a class="dropdown-item"> Nein </a>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</body>
+
+</html>
