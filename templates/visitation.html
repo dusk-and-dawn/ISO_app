@@ -1,50 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
-    <title>Begehung</title>
-</head>
+{% block title %}Interview with Camera{% endblock %}
 
-<body>
-    <div class="columns is-vcentered" style="height:100vh;">
-        <!-- Sidebar -->
-        <div class="column is-2">
-            <aside class="menu">
-                <p class="menu-label">Home</p>
-                <ul class="menu-list">
-                    <li><a href="{{ url_for('about')}}">Landing Page</a></li>
-                    <li><a href="{{ url_for('about')}}">About</a></li>
-                    <li><a href="{{ url_for('admin')}}">Contact</a></li>
-                </ul>
-                <p class="menu-label">ISO Prozess</p>
-                <ul class="menu-list">
-                    <li><a href="{{ url_for('add_client')}}">Neuer Kunde</a></li>
-                    <li><a href="{{ url_for('begehung')}}">Begehung</a></li>
-                </ul>
-            </aside>
-        </div>
-        <div class="column is-4">
-            <div class="dropdown is-active">
-                <div class="dropdown-trigger">
-                  <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                    <span>Dropdown button</span>
-                    <span class="icon is-small">
-                      <i class="fas fa-angle-down" aria-hidden="true"></i>
-                    </span>
-                  </button>
+{% block content %}
+
+    <!-- Main Content -->
+    <div class="column is-10">
+        <!-- Form starts here -->
+        <form method="post" enctype="multipart/form-data">
+
+            <!-- Kundenauswahl -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Kunde auswählen</label>
+                    <div class="control">
+                        <div class="select is-primary">
+                            <select name="dropdown_option">
+                                {% for client in clients %}
+                                <option value="{{ option | lower }}">{{ client }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                  <div class="dropdown-content">
-                    <a class="dropdown-item"> Ja </a>
-                    <a class="dropdown-item"> Nein </a>
-                  </div>
+            </div>
+
+            <!-- Camera Button Section -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Foto aufnehmen</label>
+                    <div class="control">
+                        <button class="button is-primary" type="button" onclick="useCamera()">Kamera verwenden</button>
+                    </div>
                 </div>
-              </div>
-        </div>
+
+                <!-- Video display -->
+                <div class="box">
+                    <div class="field">
+                        <label class="label">Kameravorschau</label>
+                        <video id="cameraPreview" width="640" height="480" autoplay></video>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JavaScript to activate the camera and show video feed -->
+            <script>
+                function useCamera() {
+                    const video = document.getElementById('cameraPreview');
+                    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                        navigator.mediaDevices.getUserMedia({ video: true })
+                        .then(function (stream) {
+                            video.srcObject = stream;
+                        })
+                        .catch(function (error) {
+                            console.error("Error accessing the camera: ", error);
+                        });
+                    } else {
+                        alert("Your browser does not support camera access.");
+                    }
+                }
+            </script>
+
+            <!-- Question 1 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Beschreibung für das Foto</label>
+                    <div class="control">
+                        <textarea class="textarea" name="question_1"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Wo wurde das Foto aufgenommen?</label>
+                    <div class="control">
+                        <textarea class="textarea" name="question_2"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="field is-grouped">
+                <div class="control">
+                    <input class="button is-primary" type="submit" value="Speichern">
+                </div>
+            </div>
+        </form>
+        <!-- Form ends here -->
     </div>
-</body>
 
-</html>
+{% endblock %}

@@ -1,7 +1,7 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect
 from datetime import datetime 
 import pymongo
-from db import to_db, get_from_db, clean_house
+from db import to_db, get_from_db, clean_house, get_clients, post_doc_to_db
 
 app = Flask(__name__)
 
@@ -40,12 +40,38 @@ def add_client():
 
 @app.route('/begehung,',methods=('POST', 'GET'))
 def begehung():
-    return render_template('visitation.html')
+    clients = get_clients()
+    return render_template('visitation.html', clients=clients)
     
 @app.route('/admin', methods= ('POST', 'GET'))
 def admin():
-    clientinfo = get_from_db('Puppy')
+    clientinfo = get_from_db('Puppy ')
     return render_template('test.html', clientinfo = clientinfo)
+
+@app.route('/tag2', methods=('POST', 'GET'))
+def tag2(): 
+    clients = get_clients()
+    if request.method == 'GET':
+        clients = get_clients()
+    if request.method == 'POST':
+        file=request.files['document']
+        if file:
+        # Call the function to store the document
+            description = request.form.get('description')  # Optional metadata from form
+            document_id = post_doc_to_db(file, description=description)
+
+        if document_id:
+            print(f'File successfully uploaded with ID: {document_id}')
+        else:
+            print(f'Failed to upload file')
+
+        return redirect(url_for('tag2'))
+    return render_template('tag2.html', clients=clients)
+
+@app.route('/q&a', methods=('POST', 'GET', 'PUT'))
+def q_and_a():
+    clients = get_clients()
+    return render_template('q&a.html', clients=clients)
 
 if __name__ == '__main__':
     app.run(debug=True)

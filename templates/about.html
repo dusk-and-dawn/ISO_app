@@ -1,48 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css" >
-    <title>CEO Interview</title>
-</head>
+{% block title %}Tag 2 - Interview & Dokumente{% endblock %}
+
+{% block content %}
     <body>
         <section class="section">
             <div class="container">
             <h1 class="title">
-                CEO Interview
+                Era Digitalis 
             </h1>
             <h2 class = 'subtitle'>
-                Notiere alle Infos aus der Antwort und fuege ggfs. eine Einschaetzung zur Glaubwuerdigkeit hinzu.    
+                Diese App begleitet den ISO 90001 Qualitätsmanagement-Prozess.     
             </h2>
             </div>
         </section>
         <section>
-            <form method="post">
                 <box>
-                <div>Welcher Kunde wird betreut?</div>
-                <input class ='input is-primary' name="client" placeholder="testClient"> </input>
+                <div class='subtitle'>Welcher Kunde wird betreut?</div>
+                <div class ='textContent'> 
+                    Es ist in sämtlichen Sektionen immer oben auszuwählen, für welchen existierenden Kunden die Daten gepflegt werden. 
+                    Dies erlaubt die korrekte Zuordnung der Daten. 
+                </div>
                 </box>
             <br>
                 <box>
-                <div>Wie viele Angestellte arbeiten in Ihrer Firma?</div>
-                <textarea class ='textarea' type="text" name="Q1" placeholder="Notiz zu Antwort"> </textarea>
+                    <div class='subtitle'>Navigation</div>
+                    <div class ='textContent'> 
+                    Über das Seitenmenü links kann zwischen den unterschiedlichen Sektionen hin und her navigiert werden. 
+                    Falls Dateneintragungen geschehen sind, sollten diese via den Speichern Button, an die Datenbank geschickt werden. 
+                    </div>
                 </box>
             <br>
                 <box>
-                <div>Bezahlen Sie Steuern?</div>
-                <textarea class ='textarea' type="text" name="Q2" placeholder="Notiz zu Antwort"></textarea>
+                    <div class='subtitle'>Prototyp Status</div>
+                    <div class ='textContent'> 
+                    Diese Anwendung ist noch im Alpha Status und teilweise wird an den Endanwender nicht kommuniziert, was im Backend passiert. 
+                    Dateneintragungen und deren Übergabe an die Datenbank kann via die Admin Sektion überprüft werden. 
+                    </div>
                 </box>
             <br>
                 <box>
-                <div>Sind ihre Angestellten alle versichert?</div>
-                <textarea class ='textarea' type="text" name="Q3" placeholder="Notiz zu Antwort"></textarea>
+                    <div class='subtitle'>Feedback Optionen</div>
+                    <div class ='textContent'> 
+                    Feedback an der App ist gewünscht und kann gerne so konkret wie möglich an eradigitalis@mail.com geschickt werden. 
+                    Ggfs. sind Screenshots von möglichen Problemen hilfreich um das Problem für die Techniker verständlich zu erläutern. 
+                    </div>
                 </box>
             <br>
-                <input class='button' type="submit" value="Absenden">
-            </form>
 
         </section>
     </body>
-</html>
+
+{% endblock %}

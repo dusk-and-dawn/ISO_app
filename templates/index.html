@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,7 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css" >
     <title>ICA</title>
-</head>
+</head> -->
+
+{% extends 'base.html' %}
+
+{% block title %}Tag 2 - Interview & Dokumente{% endblock %}
+
+{% block content %}
     <body>
     <section class="section">
         <div class="container">
@@ -27,7 +33,7 @@
     </section>
 
     </body>
-<aside class="menu">
+<!-- <aside class="menu">
     <p class="menu-label">Home</p>
     <ul class="menu-list">
         <li><a href="{{ url_for('about')}}">landing page</a></li>
@@ -39,7 +45,11 @@
         <li><a href="{{ url_for('add_client')}}">Neuer Kunde</a></li>
         <li><a href="{{ url_for('begehung')}}">Erste Begehung</a></li>
     </ul>
-</aside>
+    <p class="menu-label">Tag 2</p>
+    <ul class="menu-list"> 
+        <li><a href="{{ url_for('tag2')}}">Interview & Dokumente</a></li>
+    </ul>
+</aside> -->
     <br>
     <br>
     <br>
@@ -61,4 +71,5 @@
             Still a prototype, do not use in production environment.  
         </div>
     </footer>
-</html>
+
+{% endblock %}

@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block title %}Interview Questions{% endblock %}
+
+{% block content %}
+
+        <!-- Main Content -->
+        <div class="column is-10">
+            <!-- Form starts here -->
+            <form method="post" enctype="multipart/form-data">
+
+                <!-- Kundenauswahl -->
+                <div class="box">
+                    <div class="field">
+                        <label class="label">Kunde auswählen</label>
+                        <div class="control">
+                            <div class="select is-primary">
+                                <select name="dropdown_option">
+                                    {% for client in clients %}
+                                    <option value="{{ option | lower }}">{{ client }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 1 -->
+                <div class="box">
+                    <div class="field">
+                        <label class="label">Frage 1: Was sind die wichtigsten Herausforderungen in Ihrem Team?</label>
+                        <div class="control">
+                            <textarea class="textarea" name="question_1"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Follow-up Question 1.1 -->
+                    <div class="box is-nested">
+                        <div class="field">
+                            <label class="label">Nachfrage 1.1: Wie beeinflussen diese Herausforderungen den Projektverlauf?</label>
+                            <div class="control">
+                                <textarea class="textarea" name="followup_1_1"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Follow-up Question 1.2 -->
+                    <div class="box is-nested">
+                        <div class="field">
+                            <label class="label">Nachfrage 1.2: Haben Sie Strategien entwickelt, um diese Probleme zu lösen?</label>
+                            <div class="control">
+                                <textarea class="textarea" name="followup_1_2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="box">
+                    <div class="field">
+                        <label class="label">Frage 2: Welche Tools verwenden Sie zur Datenverwaltung?</label>
+                        <div class="control">
+                            <textarea class="textarea" name="question_2"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Follow-up Question 2.1 -->
+                    <div class="box is-nested">
+                        <div class="field">
+                            <label class="label">Nachfrage 2.1: Wie bewerten Sie die Effizienz dieser Tools?</label>
+                            <div class="control">
+                                <textarea class="textarea" name="followup_2_1"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Follow-up Question 2.2 -->
+                    <div class="box is-nested">
+                        <div class="field">
+                            <label class="label">Nachfrage 2.2: Gibt es Tools, die Sie ergänzen oder ersetzen möchten?</label>
+                            <div class="control">
+                                <textarea class="textarea" name="followup_2_2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="box">
+                    <div class="field">
+                        <label class="label">Frage 3: Welche Tools verwenden Sie zur Datenverwaltung?</label>
+                        <div class="control">
+                            <textarea class="textarea" name="question_2"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Follow-up Question 3.1 -->
+                    <div class="box is-nested">
+                        <div class="field">
+                            <label class="label">Nachfrage 3.1: Wie bewerten Sie die Effizienz dieser Tools?</label>
+                            <div class="control">
+                                <textarea class="textarea" name="followup_2_1"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Follow-up Question 3.2 -->
+                    <div class="box is-nested">
+                        <div class="field">
+                            <label class="label">Nachfrage 3.2: Gibt es Tools, die Sie ergänzen oder ersetzen möchten?</label>
+                            <div class="control">
+                                <textarea class="textarea" name="followup_2_2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="field is-grouped">
+                    <div class="control">
+                        <input class="button is-primary" type="submit" value="Speichern">
+                    </div>
+                </div>
+            </form>
+            <!-- Form ends here -->
+        </div>
+    </div>
+
+{% endblock %}

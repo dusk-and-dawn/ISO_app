@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Tag 2 - Interview & Dokumente{% endblock %}
+
+{% block content %}
+
+        <!-- Main Content -->
+        <div class="column is-10">
+            <!-- Form starts here -->
+            <form method="post" enctype="multipart/form-data">
+
+                <!-- Kundenauswahl -->
+                <div class="box">
+                    <div class="field">
+                        <label class="label">Kunde auswählen</label>
+                        <div class="control">
+                            <div class="select is-primary">
+                                <select name="dropdown_option">
+                                    {% for client in clients %}
+                                    <option value="{{ option | lower }}">{{ client }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- QS Management vorhanden -->
+                <div class="box">
+                    <div class="field">
+                        <label class="label">Ist bereits ein Qualitätsmanagement-Prozess vorhanden?</label>
+                        <div class="control">
+                            <div class="select is-primary">
+                                <select name="dropdown_option">
+                                    <option value="Ja">Ja</option>
+                                    <option value="Nein">Nein</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Document Upload Section -->
+                <div class="box">
+                    <div class="field">
+                        <label class="label">Upload Qualitätsmanagement-Prozess</label>
+                        <div class="file has-name is-primary">
+                            <label class="file-label">
+                                <input class="file-input" type="file" name="document">
+                                <span class="file-cta">
+                                    <span class="file-icon">
+                                        <i class="fas fa-upload"></i>
+                                    </span>
+                                    <span class="file-label">
+                                        Choose a file…
+                                    </span>
+                                </span>
+                                <span class="file-name">
+                                    No file uploaded
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="field is-grouped">
+                    <div class="control">
+                        <input class="button is-primary" type="submit" value="Speichern">
+                    </div>
+                </div>
+            </form>
+            <!-- Form ends here -->
+        </div>
+    </div>
+
+{% endblock %}
