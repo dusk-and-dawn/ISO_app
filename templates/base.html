@@ -16,8 +16,22 @@
             overflow-y: auto;
             padding: 20px;
         }
+        .custom-logo {
+        height: 80px;   /* Adjust to your desired height */
+        width: auto;    /* Maintain aspect ratio */
+        max-height: 100px; /* Prevent it from getting too large */
+    }
     </style>
     <title>{% block title %}ICA{% endblock %}</title>
+    <!-- Header with Logo -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <!-- Logo here, link it to the homepage -->
+            <a class="custom-logo" href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='images/logo_white.png') }}" alt="Company Logo" width="100" height="80">
+            </a>
+        </div>
+    </nav>
 </head>
 
 <body>
@@ -27,7 +41,7 @@
             <aside class="menu">
                 <p class="menu-label">Home</p>
                 <ul class="menu-list">
-                    <li><a href="{{ url_for('about') }}">Landing Page</a></li>
+                    <li><a href="{{ url_for('index') }}">Landing Page</a></li>
                     <li><a href="{{ url_for('about') }}">About</a></li>
                     <li><a href="{{ url_for('admin') }}">Admin Bereich</a></li>
                 </ul>
@@ -40,6 +54,7 @@
                 <ul class="menu-list"> 
                     <li><a href="{{ url_for('tag2')}}">Interview & Dokumente</a></li>
                     <li><a href="{{ url_for('q_and_a')}}">Interview detailliert</a></li>
+                    <li><a href="{{ url_for('open_qs')}}">Interview offen</a></li>
                 </ul>
             </aside>
         </div>

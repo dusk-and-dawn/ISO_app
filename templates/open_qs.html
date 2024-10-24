@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %}Interview with Dynamic Questions{% endblock %}
+
+{% block content %}
+
+    <!-- Main Content -->
+    <div class="column is-10">
+        <!-- Form starts here -->
+        <form method="post" enctype="multipart/form-data">
+
+            <!-- Kundenauswahl -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Kunde auswählen</label>
+                    <div class="control">
+                        <div class="select is-primary">
+                            <select name="dropdown_option">
+                                {% for client in clients %}
+                                <option value="{{ client | lower }}">{{ client }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 1 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 1: Beschreiben Sie die aktuellen Herausforderungen in Ihrem Team.</label>
+                    <div class="control">
+                        <textarea class="textarea" name="question_1"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 2 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 2: Welche Tools nutzen Sie zur Zusammenarbeit?</label>
+                    <div class="control">
+                        <textarea class="textarea" name="question_2"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Question Blocks Container -->
+            <div id="additional-questions-container"></div>
+
+            <!-- Add Question Button -->
+            <div class="field">
+                <div class="control">
+                    <button type="button" class="button is-primary" id="add-question-btn">Notiz hinzufügen</button>
+                </div>
+                <p id="question-count">0 von 10 zusätzlichen Notizen hinzugefügt</p>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="field is-grouped">
+                <div class="control">
+                    <input class="button is-primary" type="submit" value="Speichern">
+                </div>
+            </div>
+        </form>
+        <!-- Form ends here -->
+    </div>
+
+    <!-- JavaScript for dynamically adding question/answer blocks -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let questionCount = 0;
+            const maxQuestions = 10;
+            const addQuestionButton = document.getElementById('add-question-btn');
+            const container = document.getElementById('additional-questions-container');
+            const questionCountElement = document.getElementById('question-count');
+
+            // Function to add question blocks
+            function addQuestionBlock() {
+                if (questionCount < maxQuestions) {
+                    questionCount++;
+
+                    const questionBox = document.createElement('div');
+                    questionBox.classList.add('box');
+
+                    // Create new question block
+                    const questionField = `
+                        <div class="field">
+                            <label class="label">Notiz ${questionCount}: Geben Sie Ihre Notiz ein:</label>
+                            <div class="control">
+                                <textarea class="textarea" name="question_${questionCount + 2}"></textarea>
+                            </div>
+                        </div>
+                    `;
+
+                    // Insert the new question block into the page
+                    questionBox.innerHTML = questionField;
+                    container.appendChild(questionBox);
+
+                    // Update the counter for added questions
+                    questionCountElement.innerText = `${questionCount} von ${maxQuestions} zusätzlichen Notizen hinzugefügt`;
+                } else {
+                    alert('Sie können nicht mehr als 10 zusätzliche Notizen hinzufügen.');
+                }
+            }
+
+            // Attach event listener to the "Add Question" button
+            addQuestionButton.addEventListener('click', addQuestionBlock);
+        });
+    </script>
+
+{% endblock %}

@@ -25,26 +25,35 @@
                 </div>
             </div>
 
-            <!-- Camera Button Section -->
+                        <!-- Camera Button Section -->
             <div class="box">
-                <div class="field">
-                    <label class="label">Foto aufnehmen</label>
-                    <div class="control">
-                        <button class="button is-primary" type="button" onclick="useCamera()">Kamera verwenden</button>
-                    </div>
-                </div>
+              <div class="field">
+                  <label class="label">Foto aufnehmen</label>
+                  <div class="control">
+                      <button class="button is-primary" type="button" onclick="useCamera()">Kamera verwenden</button>
+                      <button class="button is-info" type="button" onclick="capturePhoto()">Foto aufnehmen</button>
+                  </div>
+              </div>
 
-                <!-- Video display -->
-                <div class="box">
-                    <div class="field">
-                        <label class="label">Kameravorschau</label>
-                        <video id="cameraPreview" width="640" height="480" autoplay></video>
-                    </div>
-                </div>
+              <!-- Video display -->
+              <div class="box">
+                  <div class="field">
+                      <label class="label">Kameravorschau</label>
+                      <video id="cameraPreview" width="640" height="480" autoplay></video>
+                  </div>
+              </div>
+
+              <!-- Photo preview -->
+              <div class="box">
+                  <div class="field">
+                      <label class="label">Foto Vorschau</label>
+                      <canvas id="photoCanvas" width="640" height="480"></canvas>
+                  </div>
+              </div>
             </div>
 
             <!-- JavaScript to activate the camera and show video feed -->
-            <script>
+            <!-- <script>
                 function useCamera() {
                     const video = document.getElementById('cameraPreview');
                     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -59,7 +68,63 @@
                         alert("Your browser does not support camera access.");
                     }
                 }
-            </script>
+            </script> -->
+            <script>
+              let videoStream;
+          
+              function useCamera() {
+                  const video = document.getElementById('cameraPreview');
+                  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                      navigator.mediaDevices.getUserMedia({ video: true })
+                      .then(function (stream) {
+                          videoStream = stream;
+                          video.srcObject = stream;
+                      })
+                      .catch(function (error) {
+                          console.error("Error accessing the camera: ", error);
+                      });
+                  } else {
+                      alert("Your browser does not support camera access.");
+                  }
+              }
+          
+              function capturePhoto() {
+                  const video = document.getElementById('cameraPreview');
+                  const canvas = document.getElementById('photoCanvas');
+                  const context = canvas.getContext('2d');
+          
+                  // Draw video frame to canvas
+                  context.drawImage(video, 0, 0, canvas.width, canvas.height);
+          
+                  // Convert canvas to base64 image data
+                  const base64Image = canvas.toDataURL('image/jpeg');
+          
+                  // Send the base64 image to the backend
+                  sendPhoto(base64Image);
+              }
+          
+              function sendPhoto(base64Image) {
+                  // Send the photo (base64 string) to the backend using fetch
+                  fetch('/begehung', {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({ image: base64Image })
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                      if (data.success) {
+                          alert("Photo uploaded successfully!");
+                      } else {
+                          alert("Photo upload failed.");
+                      }
+                  })
+                  .catch(error => {
+                      console.error("Error uploading the photo: ", error);
+                  });
+              }
+          </script>
 
             <!-- Question 1 -->
             <div class="box">

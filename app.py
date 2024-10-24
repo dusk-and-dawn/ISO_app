@@ -1,7 +1,7 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, jsonify
 from datetime import datetime 
 import pymongo
-from db import to_db, get_from_db, clean_house, get_clients, post_doc_to_db
+from db import to_db, get_from_db, clean_house, get_clients, post_doc_to_db, get_image_to_db
 
 app = Flask(__name__)
 
@@ -38,9 +38,17 @@ def add_client():
         to_db(client, name, content)
     return render_template('add_client.html')
 
-@app.route('/begehung,',methods=('POST', 'GET'))
+@app.route('/begehung',methods=('POST', 'GET'))
 def begehung():
     clients = get_clients()
+    if request.method == 'POST':
+
+        if request.content_type != 'application/json':
+            return jsonify({'success': False, 'message': 'Unsupported Media Type'}), 415
+        
+        data = request.get_json()
+        get_image_to_db(data)
+
     return render_template('visitation.html', clients=clients)
     
 @app.route('/admin', methods= ('POST', 'GET'))
@@ -51,27 +59,32 @@ def admin():
 @app.route('/tag2', methods=('POST', 'GET'))
 def tag2(): 
     clients = get_clients()
-    if request.method == 'GET':
-        clients = get_clients()
-    if request.method == 'POST':
-        file=request.files['document']
-        if file:
-        # Call the function to store the document
-            description = request.form.get('description')  # Optional metadata from form
-            document_id = post_doc_to_db(file, description=description)
+    # if request.method == 'GET':
+    #     clients = get_clients()
+    # if request.method == 'POST':
+    #     file=request.files['document']
+    #     if file:
+    #     # Call the function to store the document
+    #         description = request.form.get('description')  # Optional metadata from form
+    #         document_id = post_doc_to_db(file, description=description)
 
-        if document_id:
-            print(f'File successfully uploaded with ID: {document_id}')
-        else:
-            print(f'Failed to upload file')
+    #     if document_id:
+    #         print(f'File successfully uploaded with ID: {document_id}')
+    #     else:
+    #         print(f'Failed to upload file')
 
-        return redirect(url_for('tag2'))
+    #     return redirect(url_for('tag2'))
     return render_template('tag2.html', clients=clients)
 
 @app.route('/q&a', methods=('POST', 'GET', 'PUT'))
 def q_and_a():
     clients = get_clients()
     return render_template('q&a.html', clients=clients)
+
+@app.route('/open_qs', methods=('POST', 'GET', 'PUT', 'DELETE'))
+def open_qs():
+    clients = get_clients()
+    return render_template('open_qs.html', clients=clients)
 
 if __name__ == '__main__':
     app.run(debug=True)
