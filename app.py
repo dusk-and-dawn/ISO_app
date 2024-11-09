@@ -53,8 +53,21 @@ def begehung():
     
 @app.route('/admin', methods= ('POST', 'GET'))
 def admin():
-    clientinfo = get_from_db('Puppy ')
-    return render_template('test.html', clientinfo = clientinfo)
+    clients = get_clients()
+    clientinfo = get_from_db('Weihnachtsmann')
+    
+    return render_template('test.html', clients = clients, clientinfo = clientinfo)
+
+@app.route('/test', methods= ('POST', 'GET'))
+def test():
+    clients = get_clients()
+    if request.method == 'POST':
+            clientinfo = get_from_db('Weihnachtsmann')
+    else: 
+        clientinfo = []
+        for i in clients:
+            clientinfo.append(get_from_db(i))
+    return render_template('active_test.html', clients = clients, clientinfo = clientinfo)
 
 @app.route('/tag2', methods=('POST', 'GET'))
 def tag2(): 

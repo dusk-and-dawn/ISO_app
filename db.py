@@ -97,5 +97,6 @@ Tests etc.
 #to_db('Era Digitalis', 'Picco', 'Bauss Boy')
 #print(get_clients())
 #print(get_doc_from_db('test1234.txt'))
-#print(ret_image_from_db('img'))
+#print(ret_image_from_db('img1'))
+
 #save_image_from_db('img1', 'testfoto1.png')

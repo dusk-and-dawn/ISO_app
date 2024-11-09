@@ -10,9 +10,20 @@
 
 {% extends 'base.html' %}
 
-{% block title %}Tag 2 - Interview & Dokumente{% endblock %}
+{% block title %}ICA Admin{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <style>
+        #clientinfo {
+            display: none;
+        }
+    </style>
+
+{% endblock %}
 
 {% block content %}
+
 <body>
     <h1 class= 'title'>
         Picco's Raum 
