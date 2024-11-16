@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect, jsonify
 from datetime import datetime 
 import pymongo
-from db import to_db, get_from_db, clean_house, get_clients, post_doc_to_db, get_image_to_db
+from db import to_db, get_from_db, clean_house, get_clients, post_doc_to_db, get_image_to_db, get_all_images
 
 app = Flask(__name__)
 
@@ -42,11 +42,7 @@ def add_client():
 def begehung():
     clients = get_clients()
     if request.method == 'POST':
-
-        if request.content_type != 'application/json':
-            return jsonify({'success': False, 'message': 'Unsupported Media Type'}), 415
-        
-        data = request.get_json()
+        data = request.get_json() if request.is_json else request.form.to_dict()
         get_image_to_db(data)
 
     return render_template('visitation.html', clients=clients)
@@ -55,8 +51,14 @@ def begehung():
 def admin():
     clients = get_clients()
     clientinfo = get_from_db('Weihnachtsmann')
+    images = get_all_images()  # Already returns a list
     
-    return render_template('test.html', clients = clients, clientinfo = clientinfo)
+    # Add some debug prints
+    print(f"Number of images retrieved: {len(images)}")
+    if images:
+        print(f"Sample image data: {images[0].keys()}")
+    
+    return render_template('test.html', clients = clients, clientinfo = clientinfo, images=images)
 
 @app.route('/test', methods= ('POST', 'GET'))
 def test():

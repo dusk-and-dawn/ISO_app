@@ -61,6 +61,20 @@
         </table>
     </div>
 
+    <div class="images-container">
+        {% if images %}
+            {% for img in images %}
+                <div class="image-item">
+                    <img src="{{ img.image }}" alt="Uploaded image {{ img.name }}">
+                    <p>Name: {{ img.name }}</p>
+                    <p>Upload Date: {{ img.upload_date }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No images found</p>
+        {% endif %}
+    </div>
+
     <script>
         function toggleInfo() {
             var infoDiv = document.getElementById("clientinfo");

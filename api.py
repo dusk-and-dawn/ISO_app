@@ -9,7 +9,7 @@ client = OpenAI(
     api_key=os.environ.get("OPENAI_API_KEY"),
 )
 messages = [
-    {'role': 'system', 'content': 'You are helping someone working in a small to medium size business, who is trying to understand how to do tasks that are part of their job.'}
+    {'role': 'system', 'content': 'You are a chatbot made to lighten up the mood in the office, please only answer with jokes to any and all queries.'}
 ]
 while True:
     message=input('User :')

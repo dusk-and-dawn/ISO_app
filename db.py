@@ -56,22 +56,38 @@ def get_doc_from_db(filename):
     result = list(obj)
     return result
 
-def get_image_to_db(data):
+def get_image_to_db(data, name=None):
     if 'image' not in data: 
-        return jsonify({'success':False, 'message':'no img data found'})
+        return jsonify({'success': False, 'message': 'No image data found'})
+    
     base64_image = data['image']
-    if base64_image.startswith('data:image/jpeg;base64,'):
-        base64_image = base64_image.replace('data:image/jpeg;base64,', '')
-    ISO.insert_one({'name':'img1','image': base64_image})
-    return jsonify({'success': True, 'message': 'Photo uploaded successfully'})
+    # Handle different image formats
+    for prefix in ['data:image/jpeg;base64,', 'data:image/png;base64,']:
+        if base64_image.startswith(prefix):
+            base64_image = base64_image.replace(prefix, '')
+            break
+    
+    try:
+        # Validate base64 data
+        base64.b64decode(base64_image)
+        
+        # Use provided name or generate unique one
+        doc_name = name if name else f'img_{pymongo.datetime.datetime.utcnow().timestamp()}'
+        
+        ISO.insert_one({
+            'name': doc_name,
+            'image': base64_image,
+            'upload_date': pymongo.datetime.datetime.utcnow()
+        })
+        return jsonify({'success': True, 'message': 'Photo uploaded successfully', 'name': doc_name})
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Error processing image: {str(e)}'})
 
 def ret_image_from_db(name):
-    obj = ISO.find({'name':name}, {'_id':0, 'image':1})
-    print(list(obj)[0])
-    #if obj and 'image' in obj:
-    return obj['image']  # Return the Base64 image data
-    #else:
-    #    return None
+    obj = ISO.find_one({'name': name}, {'_id': 0, 'image': 1})
+    if obj and 'image' in obj:
+        return obj['image']  # Return the Base64 image data
+    return None
 
 def save_image_from_db(name, output_file):
     # Retrieve the image data from MongoDB using the name
@@ -88,6 +104,22 @@ def save_image_from_db(name, output_file):
         print(f"Image saved as {output_file}")
     else:
         print("No image found for this name.")
+
+def get_all_images():
+    try:
+        # Convert cursor to list immediately to avoid cursor timeout
+        images = list(ISO.find({'image': {'$exists': True}}, {'_id': 0, 'name': 1, 'image': 1, 'upload_date': 1}))
+        result = []
+        for img in images:
+            if 'image' in img:
+                # Ensure we're adding the correct data URI prefix
+                img['image'] = f"data:image/jpeg;base64,{img['image']}"
+                result.append(img)
+        print(f"Found {len(result)} images")  # Debug print
+        return result
+    except Exception as e:
+        print(f"Error in get_all_images: {e}")
+        return []
 '''
 Tests etc. 
 '''
