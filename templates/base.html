@@ -20,7 +20,20 @@
         height: 80px;   /* Adjust to your desired height */
         width: auto;    /* Maintain aspect ratio */
         max-height: 100px; /* Prevent it from getting too large */
-    }
+        }
+        .equal-height-columns {
+        display: flex;
+        align-items: stretch;
+        }
+
+        .equal-height-columns .column {
+        display: flex;
+        flex-direction: column;
+        }
+
+        .equal-height-columns .column .box {
+            flex-grow: 1;
+        }
     </style>
     <title>{% block title %}ICA{% endblock %}</title>
     <!-- Header with Logo -->

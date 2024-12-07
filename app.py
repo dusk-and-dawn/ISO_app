@@ -1,9 +1,13 @@
-from flask import Flask, render_template, url_for, request, redirect, jsonify
+from flask import Flask, render_template, url_for, request, redirect, jsonify, session
 from datetime import datetime 
 import pymongo
 from db import to_db, get_from_db, clean_house, get_clients, post_doc_to_db, get_image_to_db, get_all_images
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 app = Flask(__name__)
+app.secret_key = os.getenv('SECRET_KEY')
 
 @app.route('/')
 def index():
@@ -50,10 +54,14 @@ def begehung():
 @app.route('/admin', methods= ('POST', 'GET'))
 def admin():
     clients = get_clients()
-    clientinfo = get_from_db('Weihnachtsmann')
-    images = get_all_images()  # Already returns a list
+    if request.method == 'POST':
+        selected_client = request.form.get('dropdown_option')
+        clientinfo = get_from_db(selected_client)
+    else:
+        clientinfo = get_from_db('Dave')
+
+    images = get_all_images()  
     
-    # Add some debug prints
     print(f"Number of images retrieved: {len(images)}")
     if images:
         print(f"Sample image data: {images[0].keys()}")
@@ -94,7 +102,26 @@ def tag2():
 @app.route('/q&a', methods=('POST', 'GET', 'PUT'))
 def q_and_a():
     clients = get_clients()
-    return render_template('q&a.html', clients=clients)
+    chosen_client = session.get('chosen_client')
+
+    print("Current session 'chosen_client':", session.get('chosen_client'))
+    print("Default chosen_client:", chosen_client)
+
+    if 'select_client' in request.form:
+        selected_option = request.form.get('dropdown_option')
+        print("Selected option from form submission:", selected_option)
+        if selected_option:
+            session['chosen_client'] = chosen_client
+            print("Session updated with 'chosen_client':", session['chosen_client'])
+        return redirect(url_for('q_and_a'))
+    elif 'submit_answers' in request.form:
+        if 'chosen_client' not in session:
+            return redirect(url_for('q_and_a'))
+
+        # Collect answers from the form
+        answers = {key: value for key, value in request.form.items() if key != 'submit_answers'}
+        return redirect(url_for('q_and_a'))
+    return render_template('q&a.html', clients=clients, chosen_client=chosen_client)
 
 @app.route('/open_qs', methods=('POST', 'GET', 'PUT', 'DELETE'))
 def open_qs():
