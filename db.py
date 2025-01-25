@@ -125,6 +125,20 @@ def initialize_customer_to_db(client, name, content):
     ISO.insert_one({'client':client, 'name':name, 'content':content})
     ISO.insert_one({'client':str(client) + '_media', 'name':str(name) + 'media_storage', 'media_content':0})
     print(f'sent to DB: {client}, {name}, {content}')
+
+def update_text_doc(o_doc, u_fields, new_elements):
+    db_query = {'name':o_doc}
+    doc_to_update = ISO.find_one(db_query, {'_id': 0, 'content': 1})
+
+    fields_to_fill = {'$set': u_fields}
+
+    if not doc_to_update:
+        print('Ups, could not find the doc in the databank!')
+    else:
+        temp_holder = str(doc_to_update) + ' __ updated __ ' + str(new_elements)
+        ISO.update_one(doc_to_update, fields_to_fill, temp_holder)
+        print(f'updated {db_query}') 
+
 '''
 Tests etc. 
 '''

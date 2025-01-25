@@ -132,7 +132,15 @@ def open_qs():
 @app.route('/business_analysis', methods= ('POST', 'GET'))
 def business_analysis():
     clients = get_clients()
-    return render_template('new.html', clients=clients)
+    return render_template('new_sub.html', clients=clients)
+
+@app.route('Hackathon Tests', methods=('POST','GET', 'PUT'))
+def HackTests():
+    clients = get_clients()
+    if request.method == 'POST':
+        content0 = request.form['question_1']
+        update_text_doc()
+    return render_template('hack_test.html', clients=clients)
 
 if __name__ == '__main__':
     app.run(debug=True)
