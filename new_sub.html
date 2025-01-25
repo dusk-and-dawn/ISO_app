@@ -1,0 +1,728 @@
+{% extends 'base.html' %}
+
+{% block title %}Interview with Dynamic Questions{% endblock %}
+
+{% block content %}
+
+    <!-- Main Content -->
+    <div class="column is-10">
+        <!-- Form starts here -->
+        <form method="post" enctype="multipart/form-data">
+
+            <!-- Kundenauswahl -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Kunde auswählen</label>
+                    <div class="control">
+                        <div class="select is-primary">
+                            <select name="dropdown_option">
+                                {% for client in clients %}
+                                <option value="{{ client | lower }}">{{ client }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 1 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 1: Wie ist Ihr Unternehmen rechtlich strukturiert?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-1">Ausklappen</button>
+                </div>
+                <div id="question-1" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_1_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 1.1: Welche Gesellschaftsform wurde gewählt und warum?</label>
+                        <textarea class="textarea" name="question_1_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 1.2: Gibt es Beteiligungen oder Tochtergesellschaften?</label>
+                        <textarea class="textarea" name="question_1_2"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 2 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 2: Welche Geschäftsbereiche/Abteilungen gibt es und wie sind diese organisiert?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-2">Ausklappen</button>
+                </div>
+                <div id="question-2" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_2_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 2.1: Wie sind die Verantwortlichkeiten und Entscheidungsbefugnisse verteilt?</label>
+                        <textarea class="textarea" name="question_2_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 2.2: Welche Schnittstellen existieren zwischen den Bereichen?</label>
+                        <textarea class="textarea" name="question_2_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 2.3: Wie erfolgt die Koordination zwischen den Bereichen?</label>
+                        <textarea class="textarea" name="question_2_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 3 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 3: Wie ist das Qualitätsmanagement aufgestellt?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-3">Ausklappen</button>
+                </div>
+                <div id="question-3" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_3_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 3.1: Welche Zertifizierungen liegen vor?</label>
+                        <textarea class="textarea" name="question_3_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 3.2: Wie werden Prozesse dokumentiert und optimiert?</label>
+                        <textarea class="textarea" name="question_3_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 3.3: Welche QM-Software wird eingesetzt?</label>
+                        <textarea class="textarea" name="question_3_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 4 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 4: Wie ist die IT-Infrastruktur ausgestaltet?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-4">Ausklappen</button>
+                </div>
+                <div id="question-4" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_4_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 4.1: Welche Systeme werden eingesetzt?</label>
+                        <textarea class="textarea" name="question_4_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 4.2: Wie ist der Digitalisierungsgrad der Prozesse?</label>
+                        <textarea class="textarea" name="question_4_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 4.3: Welche Cloud-Lösungen nutzen Sie?</label>
+                        <textarea class="textarea" name="question_4_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 5 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 5: Wie ist der Stand der digitalen Transformation?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-5">Ausklappen</button>
+                </div>
+                <div id="question-5" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_5_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 5.1: Gibt es eine Digitalisierungsstrategie?</label>
+                        <textarea class="textarea" name="question_5_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 5.2: Welche digitalen Projekte laufen aktuell?</label>
+                        <textarea class="textarea" name="question_5_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 5.3: Wie wird Wissen im Unternehmen digital erfasst und geteilt?</label>
+                        <textarea class="textarea" name="question_5_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 6 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 6: Was sind Ihre wichtigsten Produkte und Dienstleistungen?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-6">Ausklappen</button>
+                </div>
+                <div id="question-6" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_6_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 6.1: Wie ist die Produktstrategie ausgerichtet?</label>
+                        <textarea class="textarea" name="question_6_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 6.2: Welche USPs haben Ihre Produkte?</label>
+                        <textarea class="textarea" name="question_6_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 6.3: Welche digitalen Services bieten Sie an?</label>
+                        <textarea class="textarea" name="question_6_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 7 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 7: Wie ist Ihre Wettbewerbsposition?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-7">Ausklappen</button>
+                </div>
+                <div id="question-7" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_7_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 7.1: Wie bewerten Sie Ihre Mitbewerber?</label>
+                        <textarea class="textarea" name="question_7_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 7.2: Welche Marktanteile sehen Sie für Ihr Unternehmen?</label>
+                        <textarea class="textarea" name="question_7_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 7.3: Wie differenzieren Sie sich von Ihren Mitbewerbern?</label>
+                        <textarea class="textarea" name="question_7_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 8 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 8: Wie sieht Ihre Wachstumsstrategie aus?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-8">Ausklappen</button>
+                </div>
+                <div id="question-8" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_8_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 8.1: Welche neuen Märkte möchten Sie erschließen?</label>
+                        <textarea class="textarea" name="question_8_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 8.2: Wie sehen Ihre Ziele für die nächsten 5 Jahre aus?</label>
+                        <textarea class="textarea" name="question_8_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 8.3: Welche Investitionen planen Sie?</label>
+                        <textarea class="textarea" name="question_8_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 9 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 9: Wie ist Ihre Produktentwicklungsstrategie?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-9">Ausklappen</button>
+                </div>
+                <div id="question-9" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_9_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 9.1: Welche Rolle spielt Innovation?</label>
+                        <textarea class="textarea" name="question_9_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 9.2: Wie integrieren Sie Kundenfeedback in die Entwicklung?</label>
+                        <textarea class="textarea" name="question_9_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 9.3: Welche Tools verwenden Sie für die Produktentwicklung?</label>
+                        <textarea class="textarea" name="question_9_3"></textarea>
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- Predefined Question 10 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 10: Wie ist Ihre Marketingstrategie?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-10">Ausklappen</button>
+                </div>
+                <div id="question-10" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_10_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 10.1: Welche Kanäle nutzen Sie?</label>
+                        <textarea class="textarea" name="question_10_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 10.2: Wie messen Sie den Erfolg Ihrer Kampagnen?</label>
+                        <textarea class="textarea" name="question_10_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 10.3: Welche Zielgruppen sprechen Sie an?</label>
+                        <textarea class="textarea" name="question_10_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 11 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 11: Wie organisieren Sie Ihr Lieferkettenmanagement?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-11">Ausklappen</button>
+                </div>
+                <div id="question-11" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_11_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 11.1: Welche Lieferanten nutzen Sie?</label>
+                        <textarea class="textarea" name="question_11_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 11.2: Wie sichern Sie die Qualität der Lieferungen?</label>
+                        <textarea class="textarea" name="question_11_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 11.3: Gibt es Engpässe in der Lieferkette?</label>
+                        <textarea class="textarea" name="question_11_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 12 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 12: Welche Tools verwenden Sie für Ihr Projektmanagement?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-12">Ausklappen</button>
+                </div>
+                <div id="question-12" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_12_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 12.1: Welche Prozesse nutzen Sie zur Priorisierung?</label>
+                        <textarea class="textarea" name="question_12_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 12.2: Wie stellen Sie die Kommunikation im Team sicher?</label>
+                        <textarea class="textarea" name="question_12_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 12.3: Welche Herausforderungen sehen Sie?</label>
+                        <textarea class="textarea" name="question_12_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 13 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 13: Welche Strategien verfolgen Sie im Personalmanagement?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-13">Ausklappen</button>
+                </div>
+                <div id="question-13" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_13_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 13.1: Wie fördern Sie die Weiterbildung der Mitarbeiter?</label>
+                        <textarea class="textarea" name="question_13_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 13.2: Wie bewerten Sie die Mitarbeiterzufriedenheit?</label>
+                        <textarea class="textarea" name="question_13_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 13.3: Welche Maßnahmen ergreifen Sie gegen Fluktuation?</label>
+                        <textarea class="textarea" name="question_13_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 14 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 14: Wie nutzen Sie Datenanalyse in Ihrem Unternehmen?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-14">Ausklappen</button>
+                </div>
+                <div id="question-14" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_14_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 14.1: Welche Datenquellen nutzen Sie?</label>
+                        <textarea class="textarea" name="question_14_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 14.2: Welche Tools setzen Sie für Datenanalyse ein?</label>
+                        <textarea class="textarea" name="question_14_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 14.3: Wie sichern Sie die Datenqualität?</label>
+                        <textarea class="textarea" name="question_14_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 15 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 15: Welche Rolle spielt Nachhaltigkeit in Ihrem Unternehmen?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-15">Ausklappen</button>
+                </div>
+                <div id="question-15" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_15_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 15.1: Welche Maßnahmen setzen Sie zur CO2-Reduktion um?</label>
+                        <textarea class="textarea" name="question_15_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 15.2: Wie integrieren Sie Nachhaltigkeit in Ihre Produkte?</label>
+                        <textarea class="textarea" name="question_15_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 15.3: Welche Nachhaltigkeitsziele haben Sie definiert?</label>
+                        <textarea class="textarea" name="question_15_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 16 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 16: Welche Strategien verfolgen Sie in der Kundenbindung?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-16">Ausklappen</button>
+                </div>
+                <div id="question-16" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_16_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 16.1: Wie pflegen Sie Kundenbeziehungen?</label>
+                        <textarea class="textarea" name="question_16_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 16.2: Welche CRM-Systeme nutzen Sie?</label>
+                        <textarea class="textarea" name="question_16_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 16.3: Wie messen Sie die Kundenzufriedenheit?</label>
+                        <textarea class="textarea" name="question_16_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 17 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 17: Welche Investitionen planen Sie in Zukunft?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-17">Ausklappen</button>
+                </div>
+                <div id="question-17" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_17_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 17.1: In welche Bereiche investieren Sie?</label>
+                        <textarea class="textarea" name="question_17_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 17.2: Wie priorisieren Sie Investitionsprojekte?</label>
+                        <textarea class="textarea" name="question_17_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 17.3: Welche Finanzierungsmöglichkeiten nutzen Sie?</label>
+                        <textarea class="textarea" name="question_17_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 18 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 18: Welche Maßnahmen ergreifen Sie zur Mitarbeitergewinnung?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-18">Ausklappen</button>
+                </div>
+                <div id="question-18" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_18_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 18.1: Welche Kanäle nutzen Sie für Recruiting?</label>
+                        <textarea class="textarea" name="question_18_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 18.2: Welche Vorteile bieten Sie potenziellen Mitarbeitern?</label>
+                        <textarea class="textarea" name="question_18_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 18.3: Wie gestalten Sie den Onboarding-Prozess?</label>
+                        <textarea class="textarea" name="question_18_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 19 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 19: Wie gehen Sie mit Risiken im Unternehmen um?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-19">Ausklappen</button>
+                </div>
+                <div id="question-19" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_19_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 19.1: Wie identifizieren Sie Risiken?</label>
+                        <textarea class="textarea" name="question_19_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 19.2: Welche Strategien nutzen Sie zur Risikominimierung?</label>
+                        <textarea class="textarea" name="question_19_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 19.3: Wie überwachen Sie Risiken kontinuierlich?</label>
+                        <textarea class="textarea" name="question_19_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 20 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 20: Welche Ziele verfolgen Sie im Bereich Digitalisierung?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-20">Ausklappen</button>
+                </div>
+                <div id="question-20" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_20_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 20.1: Welche Prozesse möchten Sie digitalisieren?</label>
+                        <textarea class="textarea" name="question_20_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 20.2: Welche Tools setzen Sie ein?</label>
+                        <textarea class="textarea" name="question_20_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 20.3: Welche Herausforderungen sehen Sie?</label>
+                        <textarea class="textarea" name="question_20_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 21 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 21: Wie entwickeln Sie Ihre Unternehmensstrategie?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-21">Ausklappen</button>
+                </div>
+                <div id="question-21" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_21_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 21.1: Welche Analysen führen Sie durch?</label>
+                        <textarea class="textarea" name="question_21_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 21.2: Wie setzen Sie Prioritäten?</label>
+                        <textarea class="textarea" name="question_21_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 21.3: Welche Meilensteine haben Sie definiert?</label>
+                        <textarea class="textarea" name="question_21_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 22 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 22: Wie sichern Sie die Innovationskraft Ihres Unternehmens?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-22">Ausklappen</button>
+                </div>
+                <div id="question-22" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_22_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 22.1: Wie fördern Sie Kreativität im Team?</label>
+                        <textarea class="textarea" name="question_22_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 22.2: Welche Innovationsprojekte verfolgen Sie?</label>
+                        <textarea class="textarea" name="question_22_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 22.3: Wie messen Sie den Erfolg von Innovationen?</label>
+                        <textarea class="textarea" name="question_22_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 23 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 23: Wie optimieren Sie Ihre Kostenstruktur?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-23">Ausklappen</button>
+                </div>
+                <div id="question-23" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_23_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 23.1: Welche Kostentreiber haben Sie identifiziert?</label>
+                        <textarea class="textarea" name="question_23_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 23.2: Welche Maßnahmen setzen Sie zur Kostensenkung ein?</label>
+                        <textarea class="textarea" name="question_23_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 23.3: Wie messen Sie die Auswirkungen von Optimierungen?</label>
+                        <textarea class="textarea" name="question_23_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 24 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 24: Welche Herausforderungen sehen Sie in Ihrer Branche?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-24">Ausklappen</button>
+                </div>
+                <div id="question-24" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_24_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 24.1: Welche externen Faktoren beeinflussen Ihr Geschäft?</label>
+                        <textarea class="textarea" name="question_24_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 24.2: Wie reagieren Sie auf Marktveränderungen?</label>
+                        <textarea class="textarea" name="question_24_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 24.3: Welche Chancen sehen Sie?</label>
+                        <textarea class="textarea" name="question_24_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 25 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 25: Wie stellen Sie die Qualität Ihrer Produkte sicher?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-25">Ausklappen</button>
+                </div>
+                <div id="question-25" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_25_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 25.1: Welche Qualitätsstandards setzen Sie?</label>
+                        <textarea class="textarea" name="question_25_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 25.2: Wie führen Sie Qualitätskontrollen durch?</label>
+                        <textarea class="textarea" name="question_25_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 25.3: Welche Zertifizierungen haben Sie?</label>
+                        <textarea class="textarea" name="question_25_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 26 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 26: Wie entwickeln Sie neue Geschäftsfelder?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-26">Ausklappen</button>
+                </div>
+                <div id="question-26" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_26_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 26.1: Welche Marktanalysen führen Sie durch?</label>
+                        <textarea class="textarea" name="question_26_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 26.2: Wie bewerten Sie neue Geschäftsideen?</label>
+                        <textarea class="textarea" name="question_26_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 26.3: Wie testen Sie neue Produkte oder Dienstleistungen?</label>
+                        <textarea class="textarea" name="question_26_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predefined Question 27 -->
+            <div class="box">
+                <div class="field">
+                    <label class="label">Frage 27: Wie sichern Sie die Zukunftsfähigkeit Ihres Unternehmens?</label>
+                    <button type="button" class="button is-primary toggle-btn" data-target="question-27">Ausklappen</button>
+                </div>
+                <div id="question-27" class="hidden">
+                    <div class="field">
+                        <textarea class="textarea" name="question_27_main"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 27.1: Welche langfristigen Ziele haben Sie definiert?</label>
+                        <textarea class="textarea" name="question_27_1"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 27.2: Wie fördern Sie Innovation im Unternehmen?</label>
+                        <textarea class="textarea" name="question_27_2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="label">Frage 27.3: Welche Strategien nutzen Sie zur Anpassung an Marktveränderungen?</label>
+                        <textarea class="textarea" name="question_27_3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Submit Button -->
+            <div class="field is-grouped">
+                <div class="control">
+                    <input class="button is-primary" type="submit" value="Speichern">
+                </div>
+            </div>
+        </form>
+        <!-- Form ends here -->
+    </div>
+
+    <script>
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                targetElement.classList.toggle('hidden');
+            });
+        });
+    </script>
+
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+
+{% endblock %}
