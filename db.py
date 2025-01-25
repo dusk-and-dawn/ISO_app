@@ -120,6 +120,11 @@ def get_all_images():
     except Exception as e:
         print(f"Error in get_all_images: {e}")
         return []
+    
+def initialize_customer_to_db(client, name, content):
+    ISO.insert_one({'client':client, 'name':name, 'content':content})
+    ISO.insert_one({'client':str(client) + '_media', 'name':str(name) + 'media_storage', 'media_content':0})
+    print(f'sent to DB: {client}, {name}, {content}')
 '''
 Tests etc. 
 '''

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect, jsonify, session
 from datetime import datetime 
 import pymongo
-from db import to_db, get_from_db, clean_house, get_clients, post_doc_to_db, get_image_to_db, get_all_images
+from db import to_db, get_from_db, clean_house, get_clients, post_doc_to_db, get_image_to_db, get_all_images, initialize_customer_to_db
 from dotenv import load_dotenv
 import os
 
@@ -39,7 +39,8 @@ def add_client():
         content6 = request.form['Q7']
         content7 = request.form['Q8']
         content = content0, content1, content2, content3, content4, content5, content6, content7
-        to_db(client, name, content)
+        #to_db(client, name, content)
+        initialize_customer_to_db(client, name, content)
     return render_template('add_client.html')
 
 @app.route('/begehung',methods=('POST', 'GET'))
@@ -127,6 +128,11 @@ def q_and_a():
 def open_qs():
     clients = get_clients()
     return render_template('open_qs.html', clients=clients)
+
+@app.route('/business_analysis', methods= ('POST', 'GET'))
+def business_analysis():
+    clients = get_clients()
+    return render_template('new.html', clients=clients)
 
 if __name__ == '__main__':
     app.run(debug=True)
