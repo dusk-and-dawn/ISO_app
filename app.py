@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect, jsonify, session
 from datetime import datetime 
 import pymongo
-from db import to_db, get_from_db, clean_house, get_clients, post_doc_to_db, get_image_to_db, get_all_images, initialize_customer_to_db
+from db import to_db, get_from_db, clean_house, get_clients, post_doc_to_db, get_image_to_db, get_all_images, initialize_customer_to_db, update_text_doc, update_media_doc
 from dotenv import load_dotenv
 import os
 
@@ -47,9 +47,11 @@ def add_client():
 def begehung():
     clients = get_clients()
     if request.method == 'POST':
+        print(request.form)
         data = request.get_json() if request.is_json else request.form.to_dict()
-        get_image_to_db(data)
-
+        name = request.form['question_1']
+        #get_image_to_db(data)
+        update_media_doc('doppelte Dokumente?media_storage', name, data)
     return render_template('visitation.html', clients=clients)
     
 @app.route('/admin', methods= ('POST', 'GET'))
@@ -127,6 +129,13 @@ def q_and_a():
 @app.route('/open_qs', methods=('POST', 'GET', 'PUT', 'DELETE'))
 def open_qs():
     clients = get_clients()
+    if request.method == ['POST']:
+        content0 = request.form['question_1']
+        content1 = request.form['question_2']
+        content = content0 + ';' + content1
+        update_text_doc('Nicolai Gott Programmierer', 'content', content)
+    else:
+        print('not post')
     return render_template('open_qs.html', clients=clients)
 
 @app.route('/business_analysis', methods= ('POST', 'GET'))
@@ -134,12 +143,12 @@ def business_analysis():
     clients = get_clients()
     return render_template('new_sub.html', clients=clients)
 
-@app.route('Hackathon Tests', methods=('POST','GET', 'PUT'))
+@app.route('/hackathon_tests', methods=('POST','GET', 'PUT'))
 def HackTests():
     clients = get_clients()
     if request.method == 'POST':
         content0 = request.form['question_1']
-        update_text_doc()
+        update_text_doc('Nicolai Gott Programmierer', 'content', content0)
     return render_template('hack_test.html', clients=clients)
 
 if __name__ == '__main__':

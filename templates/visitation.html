@@ -7,7 +7,7 @@
     <!-- Main Content -->
     <div class="column is-10">
         <!-- Form starts here -->
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" action='/begehung' enctype="multipart/form-data">
 
             <!-- Kundenauswahl -->
             <div class="box">
@@ -105,12 +105,18 @@
           
               function sendPhoto(base64Image) {
                   // Send the photo (base64 string) to the backend using fetch
+                  const question1 = document.querySelector('[name="question_1"]').value;
+                  const question2 = document.querySelector('[name="question_2"]').value;
                   fetch('/begehung', {
                       method: 'POST',
                       headers: {
                           'Content-Type': 'application/json'
                       },
-                      body: JSON.stringify({ image: base64Image })
+                      body: JSON.stringify({ 
+                        image: base64Image,
+                        question_1: question1,
+                        question_2: question2
+                     })
                   })
                   .then(response => response.json())
                   .then(data => {

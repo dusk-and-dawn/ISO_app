@@ -128,16 +128,49 @@ def initialize_customer_to_db(client, name, content):
 
 def update_text_doc(o_doc, u_fields, new_elements):
     db_query = {'name':o_doc}
-    doc_to_update = ISO.find_one(db_query, {'_id': 0, 'content': 1})
+    doc_to_update = ISO.find_one(db_query, {'_id': 0, 'content': 1}) # holds the content of content in a list
+    content = doc_to_update.get('content')
 
-    fields_to_fill = {'$set': u_fields}
+    fields_to_fill = {'$set': {u_fields: str(content[:]) + ' __ updated __ ' + str(new_elements)}}
 
     if not doc_to_update:
         print('Ups, could not find the doc in the databank!')
     else:
-        temp_holder = str(doc_to_update) + ' __ updated __ ' + str(new_elements)
-        ISO.update_one(doc_to_update, fields_to_fill, temp_holder)
-        print(f'updated {db_query}') 
+        #temp_holder = str(content[:]) + ' __ updated __ ' + str(new_elements)
+        ISO.update_one(doc_to_update, fields_to_fill)
+        print(f'updated {db_query} with {new_elements}') 
+
+def update_media_doc(o_doc, u_fields, data):
+    db_query = {'name':o_doc}
+    doc_to_update = ISO.find_one(db_query, {'_id': 0, 'content': 1}) # holds the content of content in a list
+    #content = doc_to_update.get('content')
+    
+    if 'image' not in data: 
+            return jsonify({'success': False, 'message': 'No image data found'})
+        
+    base64_image = data['image']
+    # Handle different image formats
+    for prefix in ['data:image/jpeg;base64,', 'data:image/png;base64,']:
+        if base64_image.startswith(prefix):
+            base64_image = base64_image.replace(prefix, '')
+            break
+
+        try:
+            # Validate base64 data
+            base64.b64decode(base64_image)
+
+            fields_to_fill = {'$set': {u_fields: data}}
+
+            if not doc_to_update:
+                print('Ups, could not find the doc in the databank!')
+            else:
+                #temp_holder = str(content[:]) + ' __ updated __ ' + str(new_elements)
+                ISO.update_one(doc_to_update, fields_to_fill)
+                print(f'updated {db_query}') 
+
+                return jsonify({'success': True, 'message': 'Photo uploaded successfully'})
+        except Exception as e:
+            return jsonify({'success': False, 'message': f'Error processing image: {str(e)}'})
 
 '''
 Tests etc. 
