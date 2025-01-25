@@ -714,11 +714,20 @@
             button.addEventListener('click', () => {
                 const targetId = button.getAttribute('data-target');
                 const targetElement = document.getElementById(targetId);
+    
+                // Umschalten der Sichtbarkeit
                 targetElement.classList.toggle('hidden');
+    
+                // Button-Text anpassen
+                if (targetElement.classList.contains('hidden')) {
+                    button.textContent = "Ausklappen";
+                } else {
+                    button.textContent = "Einklappen";
+                }
             });
         });
     </script>
-
+    
     <style>
         .hidden {
             display: none;
